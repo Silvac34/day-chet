@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { AuthService } from "./core/auth.service";
+import { UserService } from "./core/user.service";
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
@@ -36,7 +36,7 @@ export class AppComponent {
   public rubbishName: string;
   public myRubbishQty: number;
   
-  constructor(private afs: AngularFirestore, public auth: AuthService) {}
+  constructor(private afs: AngularFirestore, public auth: AuthService, public userValue: UserService) { }
   
   search = (text$: Observable<string>) =>
     text$
@@ -65,12 +65,11 @@ export class AppComponent {
     let newQuantity = 1;
     //this.afs.collection('rubbishes').add({'name': this.rubbishName, 'quantity': newQuantity, 'user': this.auth.currentUserDisplayName, 'date': now});
     //delete this.rubbishName;
-    console.log(this.auth.currentUserId)
+    console.log(this.userValue.getInfo);
     if(this.auth.currentUser != null){
       let userDB = this.afs.collection('users', ref => ref.where('name', '==', this.auth.currentUserDisplayName).where('email', '==', this.auth.currentUser.email));
       //userDB.doc(this.auth.currentUserId).set({'rubbish_quantity': (Number(userList[0]['rubbish_quantity']) + newQuantity)});
-      console.log(this.myRubbishQty);
-      this.afs.doc('users/' + this.auth.currentUserId).set({'name': this.auth.currentUserDisplayName, 'email': this.auth.currentUser.email, 'rubbish_quantity': 3});
+      //this.afs.doc('users/' + this.auth.currentUserId).set({'name': this.auth.currentUserDisplayName, 'email': this.auth.currentUser.email, 'rubbish_quantity': 3});
       
       /*let subscriptionMeta = userDB.snapshotChanges().subscribe(userMetadatas => {
         if (userMetadatas.length === 1){

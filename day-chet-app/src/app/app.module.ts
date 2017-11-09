@@ -20,6 +20,7 @@ import { UserProfileComponent } from './users/user-profile/user-profile.componen
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AuthService } from './core/auth.service';
+import { UserService } from './core/user.service';
 
 @NgModule({
   declarations: [
@@ -30,15 +31,15 @@ import { AuthService } from './core/auth.service';
   imports: [
     BrowserModule,
     AngularFontAwesomeModule,
-    NgbModule.forRoot(),
     FormsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
     AngularFirestoreModule.enablePersistence(),
     AngularFireDatabaseModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    NgbModule.forRoot()
   ],
-  providers: [AuthService],
+  providers: [AuthService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
