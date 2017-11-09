@@ -1,0 +1,12 @@
+.clear20 {
+    clear: both;
+    height: 20px;
+}
+
+/*Profile pic */
+
+.profilePic {
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+}

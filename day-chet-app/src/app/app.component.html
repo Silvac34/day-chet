@@ -1,0 +1,201 @@
+<body id="page-top">
+
+  <header class="masthead">
+    <app-user-profile></app-user-profile>
+    <app-user-login></app-user-login>
+    <div class="header-content">
+      <div class="header-content-inner">
+        <h1 id="homeHeading">Day-chet</h1>
+        <hr>
+        <p>{{(rubbishes | async)?.length}} rubbishes picked up from the street and put in a trash already</p>
+        <input id="typeahead-basic" type="text" class="form-control col-lg-8 mx-auto text-center" [(ngModel)]="rubbishName" [ngbTypeahead]="search" placeholder="Type your rubbish here"/>
+        <div class="clear10"></div>
+        <button class="btn btn-primary btn-xl" (click)="addRubbish()" [disabled]="!rubbishName">add</button>
+      </div>
+    </div>
+  </header>
+
+  <section class="bg-primary" id="about">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <h2 class="section-heading text-center text-white">Motivation</h2>
+          <hr class="light">
+          <p class="text-faded text-center">Fed up to see our streets dirty ? Polluted oceans ? Plastic garbages on the beach ? It is easily solutionable. We just have to put those in the trash and then we will have an environmental and social impact. Don't you want our world to be as
+            clean as your house ? At the end, it is our home.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 text-center">
+          <h2 class="section-heading">Ranking</h2>
+          <hr class="my-4">
+          <ul *ngFor="let user of users | async">
+            <li>
+              <strong>{{user.name}}</strong>
+              <br> {{user.email}}
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-3 col-md-6 text-center">
+          <div class="service-box mt-5 mx-auto">
+            <i class="fa fa-4x fa-diamond text-primary mb-3 sr-icons"></i>
+            <h3 class="mb-3">Sturdy Templates</h3>
+            <p class="text-muted mb-0">Our templates are updated regularly so they don't break.</p>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6 text-center">
+          <div class="service-box mt-5 mx-auto">
+            <i class="fa fa-4x fa-paper-plane text-primary mb-3 sr-icons"></i>
+            <h3 class="mb-3">Ready to Ship</h3>
+            <p class="text-muted mb-0">You can use this theme as is, or you can make changes!</p>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6 text-center">
+          <div class="service-box mt-5 mx-auto">
+            <i class="fa fa-4x fa-newspaper-o text-primary mb-3 sr-icons"></i>
+            <h3 class="mb-3">Up to Date</h3>
+            <p class="text-muted mb-0">We update dependencies to keep things fresh.</p>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6 text-center">
+          <div class="service-box mt-5 mx-auto">
+            <i class="fa fa-4x fa-heart text-primary mb-3 sr-icons"></i>
+            <h3 class="mb-3">Made with Love</h3>
+            <p class="text-muted mb-0">You have to make your websites with love these days!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="p-0" id="portfolio">
+    <div class="container-fluid">
+      <div class="row no-gutter popup-gallery">
+        <div class="col-lg-4 col-sm-6">
+          <a class="portfolio-box">
+            <div class="image">
+              <img class="img-fluid" src="assets/img/portfolio/thumbnails/9.jpg" alt="">
+              <h2 class="image-text"><span>Streets in France</span></h2>
+            </div>
+            <div class="portfolio-box-caption">
+              <div class="portfolio-box-caption-content">
+                <div class="project-category text-faded">
+                  What if streets were cleaned ?
+                </div>
+                <div class="project-name">
+                  Then we could walk on the sidewalk.
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col-lg-4 col-sm-6">
+          <a class="portfolio-box">
+            <div class="image">
+              <img class="img-fluid" src="assets/img/portfolio/thumbnails/8.jpg" alt="">
+              <h2 class="image-text"><span>Beaches in Indonesia</span></h2>
+            </div>
+            <div class="portfolio-box-caption">
+              <div class="portfolio-box-caption-content">
+                <div class="project-category text-faded">
+                  What if beaches were cleaned ?
+                </div>
+                <div class="project-name">
+                  Then it would a more plaisant life.
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col-lg-4 col-sm-6">
+          <a class="portfolio-box">
+            <div class="image">
+              <img class="img-fluid" src="assets/img/portfolio/thumbnails/7.jpg" alt="">
+              <h2 class="image-text"><span>Forests in Thailand</span></h2>
+            </div>
+            <div class="portfolio-box-caption">
+              <div class="portfolio-box-caption-content">
+                <div class="project-category text-faded">
+                  What if forests were not garbage discharges ?
+                </div>
+                <div class="project-name">
+                  Then water and soil would not be polluted.
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col-lg-4 col-sm-6">
+          <a class="portfolio-box">
+            <div class="image">
+              <img class="img-fluid" src="assets/img/portfolio/thumbnails/10.jpg" alt="">
+              <h2 class="image-text"><span>Rivers in Bulgaria</span></h2>
+            </div>
+            <div class="portfolio-box-caption">
+              <div class="portfolio-box-caption-content">
+                <div class="project-category text-faded">
+                  What if rivers were not full of plastic ?
+                </div>
+                <div class="project-name">
+                  Then we could maybe see some fishes in it.
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col-lg-4 col-sm-6">
+          <a class="portfolio-box">
+            <div class="image">
+              <img class="img-fluid" src="assets/img/portfolio/thumbnails/11.jpg" alt="">
+              <h2 class="image-text"><span>Altiplano in Bolivia</span></h2>
+            </div>
+            <div class="portfolio-box-caption">
+              <div class="portfolio-box-caption-content">
+                <div class="project-category text-faded">
+                  What if deserts were really empty ?
+                </div>
+                <div class="project-name">
+                  Then we could admire the true emptiness of deserts.
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col-lg-4 col-sm-6">
+          <a class="portfolio-box">
+            <div class="image">
+              <img class="img-fluid" src="assets/img/portfolio/thumbnails/12.jpg" alt="">
+              <h2 class="image-text"><span>Ocean in the US</span></h2>
+            </div>
+            <div class="portfolio-box-caption">
+              <div class="portfolio-box-caption-content">
+                <div class="project-category text-faded">
+                  What if oceans were cleaned ?
+                </div>
+                <div class="project-name">
+                  Then the sealife would not be dissapearing as it is.
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="call-to-action bg-dark">
+    <div class="container text-center">
+      <h2>Follow our Movement!</h2>
+      <a class="btn btn-default btn-xl sr-button" href="http://startbootstrap.com/template-overviews/creative/"><i class="fa fa-facebook fa-2x fb-btn"></i></a>
+    </div>
+  </div>
+</body>

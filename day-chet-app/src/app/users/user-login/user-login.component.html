@@ -1,0 +1,7 @@
+<div *ngIf="!auth.currentUser">
+    <button (click)="signInWithFacebook()" class="btn btn-social btn-facebook">
+  <i class="fa fa-facebook"></i>Connect Facebook
+</button>
+    <button (click)="signInWithGoogle()" class="btn btn-social btn-google">
+  <i class="fa fa-google-plus"></i>Connect Google
+</button>

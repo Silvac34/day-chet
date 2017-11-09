@@ -1,0 +1,12 @@
+<!-- User logged in -->
+<div class="clear20"></div>
+<div *ngIf="auth.currentUser">
+    <div class="pull-left">
+      <img [src]="auth.currentUser.photoURL || 'https://api.adorable.io/avatars/109/fire.png'" class="profilePic" style="margin-left:10px"> {{ auth.currentUserDisplayName }}
+    </div>
+    <button (click)="logout()" class="pull-right btn btn-warning" style="margin:5px 10px">Logout</button>
+</div>
+<!-- User NOT logged in -->
+<div *ngIf="!auth.currentUser">
+  <h3>Dear {{ auth.currentUserDisplayName }}</h3>
+</div>
