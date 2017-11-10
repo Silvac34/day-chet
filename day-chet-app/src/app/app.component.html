@@ -13,7 +13,7 @@
           <div class="clear10"></div>
           <input id="typeahead-basic" type="text" name="inputRubbish" class="form-control col-lg-8 mx-auto text-center" [(ngModel)]="rubbishName" [ngbTypeahead]="search" placeholder="Type your rubbish here" />
           <div class="clear10"></div>
-          <button type="submit" class="btn btn-primary btn-xl" (click)="addRubbish(); notClicked=false" [disabled]="!rubbishName">add</button>
+          <button type="submit" class="btn btn-primary btn-xl" (click)="addRubbish()" [disabled]="!rubbishName">add</button>
         </div>
       </div>
     </form>
