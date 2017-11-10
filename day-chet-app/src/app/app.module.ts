@@ -6,7 +6,7 @@ import { environment } from './../environments/environment';
 import { AppComponent } from './app.component';
 
 import { AngularFontAwesomeModule } from 'angular-font-awesome/angular-font-awesome';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap/typeahead/typeahead.module';
 
 // Connexion to database firestore
 
@@ -20,7 +20,6 @@ import { UserProfileComponent } from './users/user-profile/user-profile.componen
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AuthService } from './core/auth.service';
-import { UserService } from './core/user.service';
 
 @NgModule({
   declarations: [
@@ -37,9 +36,9 @@ import { UserService } from './core/user.service';
     AngularFirestoreModule.enablePersistence(),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
-    NgbModule.forRoot()
+    NgbTypeaheadModule.forRoot()
   ],
-  providers: [AuthService, UserService],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
