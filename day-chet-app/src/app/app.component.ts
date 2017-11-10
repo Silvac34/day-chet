@@ -63,10 +63,6 @@ export class AppComponent {
   addRubbish(){
     let now = new Date();
     let newQuantity = 1;
-    //add new rubbish to database
-    this.afs.collection('rubbishes').add({'name': this.rubbishName, 'quantity': newQuantity, 'user': this.auth.currentUserDisplayName, 'date': now});
-    delete this.rubbishName;
-    // modify user collection if user is authenticated
     if(this.auth.currentUser != null){
       let userColDB = this.afs.collection('users').doc(this.auth.currentUserId);
       let observable = userColDB.valueChanges().subscribe((res: any) => {
@@ -76,6 +72,10 @@ export class AppComponent {
         };
         let observable_meta = userColDB.snapshotChanges().subscribe((val: any) => {
           if(now.getTime() >= (val.payload._document.version.timestamp.seconds + 24*60*60) * 1000) {
+            //add new rubbish to database
+            this.afs.collection('rubbishes').add({'name': this.rubbishName, 'quantity': newQuantity, 'user': this.auth.currentUserDisplayName, 'date': now});
+            delete this.rubbishName;
+            // modify user collection if user is authenticated
             userColDB.set({'name': this.auth.currentUserDisplayName, 'email': this.auth.currentUser.email, 'rubbish_quantity': (Number(user_rubbish_quantity) + newQuantity), 'photoURL': this.auth.currentUser.photoURL});
             observable_meta.unsubscribe();
           }
@@ -85,6 +85,10 @@ export class AppComponent {
         });
         observable.unsubscribe();
       });
+    } else {
+        //add new rubbish to database with user == guest
+        this.afs.collection('rubbishes').add({'name': this.rubbishName, 'quantity': newQuantity, 'user': this.auth.currentUserDisplayName, 'date': now});
+        delete this.rubbishName;
     }
   }
 }
