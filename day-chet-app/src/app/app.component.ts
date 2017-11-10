@@ -32,6 +32,7 @@ export class AppComponent {
   rubbishes: Observable<Rubbish[]>;
   public rubbishList = [];
   public rubbishName: string;
+  public dataUpdated: boolean = false;
   
   constructor(private afs: AngularFirestore, public auth: AuthService) { }
   
@@ -78,8 +79,10 @@ export class AppComponent {
             // modify user collection if user is authenticated
             userColDB.set({'name': this.auth.currentUserDisplayName, 'email': this.auth.currentUser.email, 'rubbish_quantity': (Number(user_rubbish_quantity) + newQuantity), 'photoURL': this.auth.currentUser.photoURL});
             observable_meta.unsubscribe();
+            this.dataUpdated = true;
           }
           else {
+            this.dataUpdated = false;
             console.log("1 rubbish per day only");
           };
         });
@@ -89,6 +92,7 @@ export class AppComponent {
         //add new rubbish to database with user == guest
         this.afs.collection('rubbishes').add({'name': this.rubbishName, 'quantity': newQuantity, 'user': this.auth.currentUserDisplayName, 'date': now});
         delete this.rubbishName;
+        this.dataUpdated = true;
     }
   }
 }

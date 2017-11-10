@@ -3,16 +3,20 @@
   <header class="masthead">
     <app-user-profile></app-user-profile>
     <app-user-login></app-user-login>
-    <div class="header-content">
-      <div class="header-content-inner">
-        <h1 id="homeHeading">Day-chet</h1>
-        <hr>
-        <p>{{(rubbishes | async)?.length}} rubbishes picked up from the street and put in a trash already</p>
-        <input id="typeahead-basic" type="text" class="form-control col-lg-8 mx-auto text-center" [(ngModel)]="rubbishName" [ngbTypeahead]="search" placeholder="Type your rubbish here"/>
-        <div class="clear10"></div>
-        <button class="btn btn-primary btn-xl" (click)="addRubbish()" [disabled]="!rubbishName">add</button>
+    <form #f="ngForm">
+      <div class="header-content">
+        <div class="header-content-inner">
+          <h1 id="homeHeading">Day-chet</h1>
+          <hr>
+          <p>{{(rubbishes | async)?.length}} rubbishes picked up from the street and put in a trash already</p>
+          <p *ngIf="dataUpdated">Thanks {{ auth.currentUserDisplayName }}! Check ranking <a href="#ranking">here</a></p>
+          <div class="clear10"></div>
+          <input id="typeahead-basic" type="text" name="inputRubbish" class="form-control col-lg-8 mx-auto text-center" [(ngModel)]="rubbishName" [ngbTypeahead]="search" placeholder="Type your rubbish here" />
+          <div class="clear10"></div>
+          <button type="submit" class="btn btn-primary btn-xl" (click)="addRubbish(); notClicked=false" [disabled]="!rubbishName">add</button>
+        </div>
       </div>
-    </div>
+    </form>
   </header>
 
   <section class="bg-primary" id="about">
@@ -28,7 +32,7 @@
     </div>
   </section>
 
-  <section id="services">
+  <section id="ranking">
     <div class="container">
       <div class="row">
         <div class="col-lg-12 text-center">
