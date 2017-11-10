@@ -8,7 +8,7 @@ import 'rxjs/add/operator/distinctUntilChanged';
   
 interface User {
   name: string;
-  email: string;
+  photoURL: string;
   rubbish_quantity: number;
 };
 
@@ -32,7 +32,6 @@ export class AppComponent {
   rubbishes: Observable<Rubbish[]>;
   public rubbishList = [];
   public rubbishName: string;
-  public currentUserRubbishQty: number;
   
   constructor(private afs: AngularFirestore, public auth: AuthService) { }
   
@@ -45,8 +44,12 @@ export class AppComponent {
 
 
   ngOnInit() {
-    this.usersCol = this.afs.collection<User>('users');
+    //get user's ranking
+    this.usersCol = this.afs.collection<User>('users', ref => ref.orderBy('rubbish_quantity', 'desc').limit(6));
     this.users = this.usersCol.valueChanges();
+    this.users.subscribe(val => console.log(val));
+    
+    //get names of rubbishes already in database
     this.rubbishesCol = this.afs.collection<Rubbish>('rubbishes');
     this.rubbishes = this.rubbishesCol.valueChanges();
     this.rubbishes.subscribe(val => {
@@ -63,17 +66,18 @@ export class AppComponent {
     let now = new Date();
     let newQuantity = 1;
     //add new rubbish to database
-    //this.afs.collection('rubbishes').add({'name': this.rubbishName, 'quantity': newQuantity, 'user': this.auth.currentUserDisplayName, 'date': now});
-    //delete this.rubbishName;
+    this.afs.collection('rubbishes').add({'name': this.rubbishName, 'quantity': newQuantity, 'user': this.auth.currentUserDisplayName, 'date': now});
+    delete this.rubbishName;
     // modify user collection if user is authenticated
     if(this.auth.currentUser != null){
-      let observable = this.afs.collection('users').doc(this.auth.currentUserId).valueChanges().subscribe((res) => {
-          if(res != '{}') {
-            this.afs.collection('users').doc(this.auth.currentUserId).set({'rubbish_quantity': (Number(res.rubbish_quantity) + newQuantity)});
-            observable.unsubscribe();
-          }
-        }
-      );
+      let observable = this.afs.collection('users').doc(this.auth.currentUserId).valueChanges().subscribe((res: any) => {
+        let user_rubbish_quantity = 0;
+        if(res != null) {
+          user_rubbish_quantity = res.rubbish_quantity;
+        };
+        this.afs.collection('users').doc(this.auth.currentUserId).set({'name': this.auth.currentUserDisplayName, 'email': this.auth.currentUser.email, 'rubbish_quantity': (Number(user_rubbish_quantity) + newQuantity), 'photoURL': this.auth.currentUser.photoURL});
+        observable.unsubscribe();
+      });
     }
   }
 }
