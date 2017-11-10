@@ -16,7 +16,7 @@ import { UserLoginComponent } from './users/user-login/user-login.component';
 import { UserProfileComponent } from './users/user-profile/user-profile.component';
 
 // Connexion to auth firebase
-
+import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AuthService } from './core/auth.service';
 
@@ -33,6 +33,7 @@ import { AuthService } from './core/auth.service';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
     AngularFirestoreModule.enablePersistence(),
+    AngularFireDatabaseModule,
     AngularFireAuthModule,
     NgbTypeaheadModule.forRoot()
   ],

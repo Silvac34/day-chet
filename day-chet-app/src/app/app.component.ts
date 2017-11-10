@@ -47,8 +47,6 @@ export class AppComponent {
     //get user's ranking
     this.usersCol = this.afs.collection<User>('users', ref => ref.orderBy('rubbish_quantity', 'desc').limit(6));
     this.users = this.usersCol.valueChanges();
-    this.users.subscribe(val => console.log(val));
-    
     //get names of rubbishes already in database
     this.rubbishesCol = this.afs.collection<Rubbish>('rubbishes');
     this.rubbishes = this.rubbishesCol.valueChanges();
@@ -70,12 +68,21 @@ export class AppComponent {
     delete this.rubbishName;
     // modify user collection if user is authenticated
     if(this.auth.currentUser != null){
-      let observable = this.afs.collection('users').doc(this.auth.currentUserId).valueChanges().subscribe((res: any) => {
+      let userColDB = this.afs.collection('users').doc(this.auth.currentUserId);
+      let observable = userColDB.valueChanges().subscribe((res: any) => {
         let user_rubbish_quantity = 0;
         if(res != null) {
           user_rubbish_quantity = res.rubbish_quantity;
         };
-        this.afs.collection('users').doc(this.auth.currentUserId).set({'name': this.auth.currentUserDisplayName, 'email': this.auth.currentUser.email, 'rubbish_quantity': (Number(user_rubbish_quantity) + newQuantity), 'photoURL': this.auth.currentUser.photoURL});
+        let observable_meta = userColDB.snapshotChanges().subscribe((val: any) => {
+          if(now.getTime() >= (val.payload._document.version.timestamp.seconds + 24*60*60) * 1000) {
+            userColDB.set({'name': this.auth.currentUserDisplayName, 'email': this.auth.currentUser.email, 'rubbish_quantity': (Number(user_rubbish_quantity) + newQuantity), 'photoURL': this.auth.currentUser.photoURL});
+            observable_meta.unsubscribe();
+          }
+          else {
+            console.log("1 rubbish per day only");
+          };
+        });
         observable.unsubscribe();
       });
     }

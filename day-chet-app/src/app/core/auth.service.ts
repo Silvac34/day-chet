@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { AngularFireDatabase } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase';
 
@@ -8,11 +9,13 @@ export class AuthService {
 
   authState: any = null;
 
-  constructor(private afAuth: AngularFireAuth) {
-    this.afAuth.authState.subscribe((auth) => {
-      this.authState = auth
-    });
-  }
+  constructor(private afAuth: AngularFireAuth,
+              private db: AngularFireDatabase) {
+
+            this.afAuth.authState.subscribe((auth) => {
+              this.authState = auth
+            });
+          }
 
   // Returns true if user is logged in
   get authenticated(): boolean {
@@ -121,6 +124,9 @@ export class AuthService {
                   email: this.authState.email,
                   name: this.authState.displayName
                 }
+
+    this.db.object(path).update(data)
+    .catch(error => console.log(error));
 
   }
 
