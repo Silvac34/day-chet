@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { AuthService } from "./core/auth.service";
+import { TranslateService } from '@ngx-translate/core';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
@@ -34,7 +35,15 @@ export class AppComponent {
   public rubbishName: string;
   public dataUpdated: boolean = false;
   
-  constructor(private afs: AngularFirestore, public auth: AuthService) { }
+  constructor(private afs: AngularFirestore, public auth: AuthService, private translate: TranslateService) {
+    let userLang = navigator.language; 
+    translate.setDefaultLang('en');
+    translate.use(userLang);
+  }
+
+  switchLanguage(language: string) {
+    this.translate.use(language);
+  }
   
   search = (text$: Observable<string>) =>
     text$
@@ -72,7 +81,7 @@ export class AppComponent {
           user_rubbish_quantity = res.rubbish_quantity;
         };
         let observable_meta = userColDB.snapshotChanges().subscribe((val: any) => {
-          if(now.getTime() >= (val.payload._document.version.timestamp.seconds + 24*60*60) * 1000) {
+          if(user_rubbish_quantity == 0){
             //add new rubbish to database
             this.afs.collection('rubbishes').add({'name': this.rubbishName, 'quantity': newQuantity, 'user': this.auth.currentUserDisplayName, 'date': now});
             delete this.rubbishName;
@@ -81,10 +90,21 @@ export class AppComponent {
             observable_meta.unsubscribe();
             this.dataUpdated = true;
           }
-          else {
-            this.dataUpdated = false;
-            console.log("1 rubbish per day only");
-          };
+          else{
+            if(now.getTime() >= (val.payload._document.version.timestamp.seconds + 24*60*60) * 1000) {
+              //add new rubbish to database
+              this.afs.collection('rubbishes').add({'name': this.rubbishName, 'quantity': newQuantity, 'user': this.auth.currentUserDisplayName, 'date': now});
+              delete this.rubbishName;
+              // modify user collection if user is authenticated
+              userColDB.set({'name': this.auth.currentUserDisplayName, 'email': this.auth.currentUser.email, 'rubbish_quantity': (Number(user_rubbish_quantity) + newQuantity), 'photoURL': this.auth.currentUser.photoURL});
+              observable_meta.unsubscribe();
+              this.dataUpdated = true;
+            }
+            else {
+              this.dataUpdated = false;
+              console.log("1 rubbish per day only");
+            };
+          }
         });
         observable.unsubscribe();
       });
