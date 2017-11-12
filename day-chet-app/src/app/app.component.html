@@ -42,13 +42,15 @@
     </div>
     <div class="container">
       <div class="row">
-        <div class="col-lg-3 col-md-6 text-center" *ngFor="let user of users | async" *ngIf="user.rubbish_quantity > 0">
-          <div class="service-box mt-5 mx-auto">
-            <img [src]="user.photoURL || 'https://api.adorable.io/avatars/109/fire.png'" class="rankingPic mb-3">
-            <h3 class="mb-3">{{user.name}}</h3>
-            <p class="text-muted mb-0"><span translate>RANKING.POINTS</span>: {{user.rubbish_quantity}}</p>
+        <ng-container *ngFor="let user of users | async">
+          <div class="col-lg-3 col-md-6 text-center" *ngIf="user.rubbish_quantity > 0">
+            <div class="service-box mt-5 mx-auto">
+              <img [src]="user.photoURL || 'https://api.adorable.io/avatars/109/fire.png'" class="rankingPic mb-3">
+              <h3 class="mb-3">{{user.name}}</h3>
+              <p class="text-muted mb-0"><span translate>RANKING.POINTS</span>: {{user.rubbish_quantity}}</p>
+            </div>
           </div>
-        </div>
+        </ng-container>
       </div>
     </div>
   </section>
