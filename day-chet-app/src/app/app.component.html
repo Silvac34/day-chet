@@ -6,7 +6,7 @@
     <form #f="ngForm">
       <div class="header-content">
         <div class="header-content-inner">
-          <h1 id="homeHeading">Day-chet</h1>
+          <h1 id="homeHeading" translate>TITLE</h1>
           <hr>
           <p>{{(rubbishes | async)?.length}} {{ 'PARAGRAPH_1' | translate }}</p>
           <p *ngIf="dataUpdated">{{ 'UPDATED_MESSAGE_1' | translate}} {{ auth.currentUserDisplayName }}! <span translate [innerHTML]="'UPDATED_MESSAGE_2' | translate"></span></p>
