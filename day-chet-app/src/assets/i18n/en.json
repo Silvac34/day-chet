@@ -1,0 +1,40 @@
+{
+    "TITLE": "What if there were no more rubbish ?",
+    "PARAGRAPH_1": "rubbishes picked up from the street and put in a trash already",
+    "UPDATED_MESSAGE_1": "Thanks",
+    "UPDATED_MESSAGE_2": "Check ranking <a href=\"#ranking\">here</a>",
+    "PLACEHOLDER": "Type your rubbish here",
+    "ADD": "Add",
+    "MOTIVATION": {
+        "TITLE": "Motivation",
+        "PARAGRAPH": "Fed up to see our streets dirty ? Polluted oceans ? Plastic garbages on the beach ? It is easily solutionable. If everyone put one rubbish per day in a trash, we will have an environmental and social impact. Your house is clean isn't it ? The world is your home right ? So the world should be as clean as your house."
+    },
+    "RANKING": {
+        "TITLE": "Ranking",
+        "POINTS": "Points"
+    },
+    "PORTFOLIO": {
+        "TITLE_1": "Streets in France",
+        "SUBTITLE_1": "What if streets were cleaned ?",
+        "PARAGRAPH_1": "Then we could walk on the sidewalk.",
+        "TITLE_2": "Beaches in Indonesia",
+        "SUBTITLE_2": "What if beaches were cleaned ?",
+        "PARAGRAPH_2": "Then it would a more plaisant view.",
+        "TITLE_3": "Forests in Thailand",
+        "SUBTITLE_3": "What if forests were not garbage discharges ?",
+        "PARAGRAPH_3": "Then water and soil would not be polluted.",
+        "TITLE_4": "Rivers in Bulgaria",
+        "SUBTITLE_4": "What if rivers were not full of plastic ?",
+        "PARAGRAPH_4": "Then we could maybe see some fishes in it.",
+        "TITLE_5": "Altiplano in Bolivia",
+        "SUBTITLE_5": "What if deserts were really empty ?",
+        "PARAGRAPH_5": "Then we could admire the true emptiness of deserts.",
+        "TITLE_6": "Ocean in the US",
+        "SUBTITLE_6": "What if oceans were cleaned ?",
+        "PARAGRAPH_6": "Then the sealife would not be dissapearing as it is."
+    },
+    "CALL_TO_ACTION": {
+        "TITLE": "Follow our Movement!"
+    },
+    "HELLO": "Hello"
+}

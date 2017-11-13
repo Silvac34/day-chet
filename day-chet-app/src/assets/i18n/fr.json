@@ -1,0 +1,40 @@
+{
+    "TITLE": "Et s'il n'y avait plus de déchets ?",
+    "PARAGRAPH_1": "déchets déjà ramassés et mis à la poubelle",
+    "UPDATED_MESSAGE_1": "Merci",
+    "UPDATED_MESSAGE_2": "Regarde le classement <a href=\"#ranking\">ici</a>",
+    "PLACEHOLDER": "Tape ton déchet ici",
+    "ADD": "Ajouter",
+    "MOTIVATION": {
+        "TITLE": "Motivation",
+        "PARAGRAPH": "Marre de voir nos rues sales ? Les océans pollués ? Des déchets plastiques sur la plage ? Il y a pourtant une solution simple. Si chacun rammasse chaque jour un déchet et le met à la poubelle, on aura un impact environnemental et social. Chez toi, c'est propre non? Alors si tu considères le monde comme chez toi, dehors devrait être aussi propre que dedans."
+    },
+    "RANKING": {
+        "TITLE": "Classement",
+        "POINTS": "Points"
+    },
+    "PORTFOLIO": {
+        "TITLE_1": "Rues en France",
+        "SUBTITLE_1": "Et si les rues étaient propres ?",
+        "PARAGRAPH_1": "Alors, on pourrait marcher sur les trottoirs",
+        "TITLE_2": "Plages en Indonésie",
+        "SUBTITLE_2": "Et si les plages étaient propres ?",
+        "PARAGRAPH_2": "Alors, la vue serait plus belle.",
+        "TITLE_3": "Forêts en Thaïlande",
+        "SUBTITLE_3": "Et si les forêts n'étaient pas des décharges ?",
+        "PARAGRAPH_3": "Alors, l'eau et le sol ne seraient pas pollués.",
+        "TITLE_4": "Rivières en Bulgarie",
+        "SUBTITLE_4": "Et si les rivières n'étaient pas couvertes de plastiques ?",
+        "PARAGRAPH_4": "Alors, on pourrait peut être y voir des poissons.",
+        "TITLE_5": "Altiplano en Bolivie",
+        "SUBTITLE_5": "Et si le désert était vraiment vide ?",
+        "PARAGRAPH_5": "Alors, on pourrait admirer le vrai vide d'un désert.",
+        "TITLE_6": "Océan aux US",
+        "SUBTITLE_6": "Et si les océans étaient propres ?",
+        "PARAGRAPH_6": "Alors, la vie sous-marine ne serait pas en train de disparaître."
+    },
+    "CALL_TO_ACTION": {
+        "TITLE": "Rejoignez le mouvement!"
+    },
+    "HELLO": "Salut"
+}
