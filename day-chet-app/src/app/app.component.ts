@@ -80,32 +80,22 @@ export class AppComponent {
         if(res != null) {
           user_rubbish_quantity = res.rubbish_quantity;
         };
-        let observable_meta = userColDB.snapshotChanges().subscribe((val: any) => {
-          if(user_rubbish_quantity == 0){
-            //add new rubbish to database
-            this.afs.collection('rubbishes').add({'name': this.rubbishName, 'quantity': newQuantity, 'user': this.auth.currentUserDisplayName, 'date': now});
-            delete this.rubbishName;
-            // modify user collection if user is authenticated
-            userColDB.set({'name': this.auth.currentUserDisplayName, 'email': this.auth.currentUser.email, 'rubbish_quantity': (Number(user_rubbish_quantity) + newQuantity), 'photoURL': this.auth.currentUser.photoURL});
-            observable_meta.unsubscribe();
-            this.dataUpdated = true;
-          }
-          else{
-            if(now.getTime() >= (val.payload._document.version.timestamp.seconds + 24*60*60) * 1000) {
-              //add new rubbish to database
-              this.afs.collection('rubbishes').add({'name': this.rubbishName, 'quantity': newQuantity, 'user': this.auth.currentUserDisplayName, 'date': now});
-              delete this.rubbishName;
-              // modify user collection if user is authenticated
-              userColDB.set({'name': this.auth.currentUserDisplayName, 'email': this.auth.currentUser.email, 'rubbish_quantity': (Number(user_rubbish_quantity) + newQuantity), 'photoURL': this.auth.currentUser.photoURL});
-              observable_meta.unsubscribe();
-              this.dataUpdated = true;
-            }
-            else {
-              this.dataUpdated = false;
-              console.log("1 rubbish per day only");
-            };
-          }
-        });
+        if(user_rubbish_quantity == 0){
+          //add new rubbish to database
+          this.afs.collection('rubbishes').add({'name': this.rubbishName, 'quantity': newQuantity, 'user': this.auth.currentUserDisplayName, 'date': now});
+          delete this.rubbishName;
+          // modify user collection if user is authenticated
+          userColDB.set({'name': this.auth.currentUserDisplayName, 'email': this.auth.currentUser.email, 'rubbish_quantity': (Number(user_rubbish_quantity) + newQuantity), 'photoURL': this.auth.currentUser.photoURL});
+          this.dataUpdated = true;
+        }
+        else{
+          //add new rubbish to database
+          this.afs.collection('rubbishes').add({'name': this.rubbishName, 'quantity': newQuantity, 'user': this.auth.currentUserDisplayName, 'date': now});
+          delete this.rubbishName;
+          // modify user collection if user is authenticated
+          userColDB.set({'name': this.auth.currentUserDisplayName, 'email': this.auth.currentUser.email, 'rubbish_quantity': (Number(user_rubbish_quantity) + newQuantity), 'photoURL': this.auth.currentUser.photoURL});
+          this.dataUpdated = true;
+        }
         observable.unsubscribe();
       });
     } else {
